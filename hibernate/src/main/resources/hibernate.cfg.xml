@@ -1,19 +1,20 @@
 <hibernate-configuration>
     <session-factory>
         <!--Database connection settings-->
-        <property name="connection.url">jdbc:h2:./data/contactmgr</property>
+        <!--Specify connection URL for the H2 database file-->
+        <property name="connection.url">jdbc:h2:./data/countrymgr</property>
+        <!--Database credentials-->
         <property name="connection.username">sa</property>
+        <!--Set the DB driver class to the H2 driver-->
         <property name="connection.driver_class">org.h2Driver</property>
 
-
-
-        <!--SQL Dialect-->
+        <!--SQL Dialect, Configure dialect for H2 database-->
         <property name="dialect">org.hibernate.dialect.H2Dialect</property>
 
         <!--Create the database schema on startup-->
-        <property name="hbm2ddl.auto">country</property>
+        <property name="hbm2ddl.auto">create</property>
 
         <!--Names the annotated entity classes-->
-        <mapping class="com.teamtreehouse.contactmngr.model.Country" />
+        <mapping class="com.teamtreehouse.countrymgr.model.Country" />
     </session-factory>
 </hibernate-configuration>
