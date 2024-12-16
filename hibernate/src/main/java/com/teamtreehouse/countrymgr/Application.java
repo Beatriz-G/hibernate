@@ -19,14 +19,16 @@ public class Application {
     private static SessionFactory buildSessionFactory() {
         // Create a StandardServiceRegistry
         final ServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
-        // Hibernate SessionFactory
+        // Hibernate SessionFactory*
         return new MetadataSources(registry).buildMetadata().buildSessionFactory();
     }
 
     public static void main(String[] args) {
 
+    }
 
-    // Display the Country Data
+
+        // Display the Country Data
         private static List<Country> fetchAllCountries() {
             // Opening a session
             Session session = sessionFactory.openSession();
@@ -44,17 +46,10 @@ public class Application {
             return countries;
         }
 
+        public static void displayCountryData(List<Country> countries) {
+            System.out.printf("%-3s %-32% %-11s %-11s%n", "Code", "Name", "Internet Users");
 
-
-
-
-
-
-
-
-
-
-
+        }
 
 
 
@@ -83,7 +78,7 @@ public class Application {
         // Close the session
         session.close();
     */
-    }
+
 
 
 }
