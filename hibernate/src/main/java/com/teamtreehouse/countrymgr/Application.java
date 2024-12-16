@@ -51,7 +51,7 @@ public class Application {
         public static void displayCountryData(List<Country> countries) {
             System.out.printf("View Country Data Here");
             System.out.printf("%-3s %-32% %-11s %-11s%n", "Code", "Name", "Internet Users", "Literacy Rate");
-
+    
 
         }
 
