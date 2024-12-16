@@ -16,13 +16,21 @@ public class Country {
     private String name;
 
     @Column
-    private String internetUsers;
+    private Double internetUsers;
 
     @Column
-    private String adultLiteracyRate;
+    private Double adultLiteracyRate;
 
     // Default constructor for JPA
     public Country() {}
+
+    // Builder constructor
+    public Country(CountryBuilder builder) {
+        this.name = builder.name;
+        this.code = builder.code;
+        this.internetUsers = builder.internetUser;
+        this.adultLiteracyRate = builder.adultLiteracyRate;
+    }
 
     // ToString method
     @Override
@@ -60,19 +68,46 @@ public class Country {
         this.name = name;
     }
 
-    public String getInternetUsers() {
+    public Double getInternetUsers() {
         return internetUsers;
     }
 
-    public void setInternetUsers(String internetUsers) {
+    public void setInternetUsers(Double internetUsers) {
         this.internetUsers = internetUsers;
     }
 
-    public String getAdultLiteracyRate() {
+    public Double getAdultLiteracyRate() {
         return adultLiteracyRate;
     }
 
-    public void setAdultLiteracyRate(String adultLiteracyRate) {
+    public void setAdultLiteracyRate(Double adultLiteracyRate) {
         this.adultLiteracyRate = adultLiteracyRate;
+    }
+
+    // Builder
+    public static class CountryBuilder {
+        private String name;
+        private String code;
+        private Double internetUser;
+        private Double adultLiteracyRate;
+
+        public CountryBuilder(String name, String code) {
+            this.name = name;
+            this.code = name;
+        }
+
+        public CountryBuilder withInternetUsers(Double internetUsers) {
+            this.internetUser = internetUsers;
+            return this;
+        }
+
+        public CountryBuilder withAdultLiteracyRate(Double adultLiteracyRate) {
+            this.adultLiteracyRate = adultLiteracyRate;
+            return this;
+        }
+
+        public Country build() {
+            return new Country(this);
+        }
     }
 }
