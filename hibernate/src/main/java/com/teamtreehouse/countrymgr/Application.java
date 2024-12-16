@@ -24,11 +24,12 @@ public class Application {
     }
 
     public static void main(String[] args) {
-        
+
     }
 
 
         // Display the Country Data
+        // Fetch all countries with Hibernate
         private static List<Country> fetchAllCountries() {
             // Opening a session
             Session session = sessionFactory.openSession();
@@ -46,7 +47,10 @@ public class Application {
             return countries;
         }
 
+        // Format data in columns with headers
         public static void displayCountryData(List<Country> countries) {
+            System.out.printf("View Country Data Here");
+            System.out.printf("%-3s %-32% %-11s %-11s%n", "Code", "Name", "Internet Users", "Literacy Rate");
 
 
         }
