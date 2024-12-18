@@ -13,7 +13,6 @@ import org.hibernate.service.ServiceRegistry;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.text.DecimalFormat;
 import java.util.*;
 
 import static java.lang.System.out;
@@ -57,8 +56,8 @@ public class Application {
 
     // Format data in columns with headers
     public static void displayCountryData(List<Country> countries) {
-        System.out.println("View Country Data Here");
-        System.out.printf("%-10s %-30% %-25s %-20s%n", "Code", "Name", "Internet Users", "Literacy Rate");
+        System.out.println("--------------------------View Country Data Here--------------------------");
+        System.out.printf("%-10s %-30s %-25s %-20s%n", "Code", "Name", "Internet Users", "Literacy Rate");
         // Format country data
         for (Country country : countries) {
             System.out.printf(
@@ -191,19 +190,19 @@ public class Application {
     }
 */
     private static String promptAction() throws IOException {
-        Map<String, String> menu = new TreeMap<>();
-        System.out.printf("Menu: %n");
-        for (Map.Entry<String, String> option : menu.entrySet()) {
-            out.printf("%s -> %s%n", option.getKey(), option.getValue());
-        }
-
         // Menu Options
+        Map<String, String> menu = new TreeMap<>();
         menu.put("View", "View country data");
         menu.put("Analysis", "View maximum and minumum values for each country");
         menu.put("Add", "Add data");
         menu.put("Edit", "Edit data");
         menu.put("Delete", "Delete data");
         menu.put("Quit", "Exits the program");
+
+        System.out.printf("Menu: %n");
+        for (Map.Entry<String, String> option : menu.entrySet()) {
+            out.printf("%s --> %s%n", option.getKey(), option.getValue());
+        }
 
         System.out.printf("Select an option: ");
         String choice = reader.readLine();
@@ -222,11 +221,11 @@ public class Application {
                     case "analysis":
                         //displayAnalysis(fetchAllCountries());
                         break;
-                    case "edit":
-                        //editCountry(fetchAllCountries());
-                        break;
                     case "add":
                         //addNewCountry();
+                        break;
+                    case "edit":
+                        //editCountry(fetchAllCountries());
                         break;
                     case "delete":
                         //deleteCountry();
