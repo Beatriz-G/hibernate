@@ -6,9 +6,6 @@ import jakarta.persistence.*;
 public class Country {
 
     @Id
-    private int id;
-
-    @Column
     private String code;
 
     @Column
@@ -27,7 +24,7 @@ public class Country {
     public Country(CountryBuilder builder) {
         this.name = builder.name;
         this.code = builder.code;
-        this.internetUsers = builder.internetUser;
+        this.internetUsers = builder.internetUsers;
         this.adultLiteracyRate = builder.adultLiteracyRate;
     }
 
@@ -35,20 +32,11 @@ public class Country {
     @Override
     public String toString() {
         return "Country{" +
-                "id=" + id +
                 ", code='" + code + '\'' +
                 ", name='" + name + '\'' +
                 ", internetUsers='" + internetUsers + '\'' +
                 ", adultLiteracyRate='" + adultLiteracyRate + '\'' +
                 '}';
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getCode() {
@@ -87,16 +75,16 @@ public class Country {
     public static class CountryBuilder {
         private String name;
         private String code;
-        private Double internetUser;
+        private Double internetUsers;
         private Double adultLiteracyRate;
 
         public CountryBuilder(String name, String code) {
             this.name = name;
-            this.code = name;
+            this.code = code;
         }
 
         public CountryBuilder withInternetUsers(Double internetUsers) {
-            this.internetUser = internetUsers;
+            this.internetUsers = internetUsers;
             return this;
         }
 

@@ -31,7 +31,7 @@ public class Application {
     }
 
     public static void main(String[] args) {
-        //List<Country> countries = fetchAllCountries();
+        List<Country> countries = fetchAllCountries();
         run();
 
     }
@@ -79,7 +79,7 @@ public class Application {
             return String.format("%.2f", value);
         }
     }
-
+/*
     // Display the Analysis
     // Calculate and display max/min values for internetUsers and adultLiteracyRate
     private static void displayAnalysis(List<Country> countries) {
@@ -189,7 +189,7 @@ public class Application {
         session.close();
         System.out.printf("You deleted %f%s from the list.", country.getName());
     }
-
+*/
     private static String promptAction() throws IOException {
         Map<String, String> menu = new TreeMap<>();
         System.out.printf("Menu: %n");
@@ -220,16 +220,16 @@ public class Application {
                         displayCountryData(fetchAllCountries());
                         break;
                     case "analysis":
-                        displayAnalysis(fetchAllCountries());
+                        //displayAnalysis(fetchAllCountries());
                         break;
                     case "edit":
-                        editCountry(fetchAllCountries());
+                        //editCountry(fetchAllCountries());
                         break;
                     case "add":
-                        addNewCountry();
+                        //addNewCountry();
                         break;
                     case "delete":
-                        deleteCountry();
+                        //deleteCountry();
                         break;
                     case "quit":
                         out.println("End of Program");
