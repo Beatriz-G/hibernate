@@ -6,7 +6,6 @@ import jakarta.persistence.*;
 public class Country {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column

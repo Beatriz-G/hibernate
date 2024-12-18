@@ -2,7 +2,7 @@
     <session-factory>
         <!--Database connection settings-->
         <!--Specify connection URL for the H2 database file-->
-        <property name="connection.url">jdbc:h2:./data/countrymgr</property>
+        <property name="connection.url">jdbc:h2:./data/worldbank</property>
         <!--Database credentials-->
         <property name="connection.username">sa</property>
         <!--Set the DB driver class to the H2 driver-->
