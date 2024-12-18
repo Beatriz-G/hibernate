@@ -30,7 +30,7 @@ public class Application {
     }
 
     public static void main(String[] args) {
-        List<Country> countries = fetchAllCountries();
+        //List<Country> countries = fetchAllCountries();
         run();
 
     }
@@ -154,33 +154,45 @@ public class Application {
         session.close();
     }
 
+*/
+    // Save
+    public static void save(Country country) throws IOException {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        session.save(country);
+        session.getTransaction().commit();
+        session.close();
+    }
 
     // Country Addition
     private static void addNewCountry() throws IOException {
-        System.out.println("Enter data for new country: ");
+        List<Country> countries = fetchAllCountries();
+        System.out.println("----------Enter data for new country---------- ");
+
+        System.out.printf("Give a country code with three characters: " );
+        String code = reader.readLine().trim().toUpperCase();
+
+        System.out.println("What is the name of the country? ");
         String name = reader.readLine().trim();
 
-        String code="";
-        while (code.length() != 3) {
-            System.out.printf("Please give a country code with three characters: ");
-            code = reader.readLine().trim();
-        }
-
-        System.out.printf("Please enter percentage of Internet Users: ");
+        System.out.printf("Enter percentage of Internet Users: ");
         String internetUsers = reader.readLine().trim();
 
-        System.out.printf("Please enter adult literacy percentage: ");
+        System.out.printf("Enter adult literacy percentage: ");
         String adultLiteracyRate = reader.readLine().trim();
 
         // Save data to database
         Country country = new CountryBuilder(code, name)
-                .withInternetUsers(internetUsers)
-                .withAdultLiteracyRate(adultLiteracyRate)
+                .withInternetUsers(Double.parseDouble(internetUsers) )
+                .withAdultLiteracyRate(Double.parseDouble(adultLiteracyRate))
                 .build();
             save(country);
             System.out.println("Country added successfully!");
     }
+    // figure out how to make literacy and internet 2% digits
 
+
+/*
     // Country deletion capability
     public static void deleteCountry(Country country) {
         Session session = sessionFactory.openSession();
@@ -224,7 +236,7 @@ public class Application {
                         displayAnalysis(fetchAllCountries());
                         break;
                     case "add":
-                        //addNewCountry();
+                        addNewCountry();
                         break;
                     case "edit":
                         //editCountry(fetchAllCountries());
