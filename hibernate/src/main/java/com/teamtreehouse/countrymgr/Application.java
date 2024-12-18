@@ -56,7 +56,7 @@ public class Application {
 
     // Format data in columns with headers
     public static void displayCountryData(List<Country> countries) {
-        System.out.println("--------------------------View Country Data Here--------------------------");
+        System.out.println("------------------------------View Country Data Here------------------------------");
         System.out.printf("%-10s %-30s %-25s %-20s%n", "Code", "Name", "Internet Users", "Literacy Rate");
         // Format country data
         for (Country country : countries) {
@@ -78,7 +78,7 @@ public class Application {
             return String.format("%.2f", value);
         }
     }
-/*
+
     // Display the Analysis
     // Calculate and display max/min values for internetUsers and adultLiteracyRate
     private static void displayAnalysis(List<Country> countries) {
@@ -108,14 +108,16 @@ public class Application {
 
 
         // Display the analysis
-        System.out.println("Country Analysis");
-        System.out.printf("Country with the highest % of internet users is %s with %.2f.", maxInternet.getName(), maxInternet.getInternetUsers());
-        System.out.printf("Country with the lowest % of internet users is %s with %.2f.", minInternet.getName(), minInternet.getInternetUsers());
-        System.out.printf("Country with the highest % of adult literacy is %s with %.2f.", maxLiteracy.getName(), maxLiteracy.getAdultLiteracyRate());
-        System.out.printf("Country with the lowest % of adult literacy is %s with %.2f.", minLiteracy.getName(), maxLiteracy.getAdultLiteracyRate());
+        System.out.println("---------------Country Analysis---------------");
+        System.out.printf("Country with the highest percentage of internet users is %s with %.2f.%n",
+                maxInternet.getName(),
+                maxInternet.getInternetUsers());
+        System.out.printf("Country with the lowest percentage of internet users is %s with %.2f.%n", minInternet.getName(), minInternet.getInternetUsers());
+        System.out.printf("Country with the highest adult literacy is %s with %.2f.%n", maxLiteracy.getName(), maxLiteracy.getAdultLiteracyRate());
+        System.out.printf("Country with the lowest adult literacy is %s with %.2f.%n", minLiteracy.getName(), maxLiteracy.getAdultLiteracyRate());
     }
 
-
+/*
     // Get country by code
     private static Country fetchCountryCode(String code) {
         Session session = sessionFactory.openSession();
@@ -219,7 +221,7 @@ public class Application {
                         displayCountryData(fetchAllCountries());
                         break;
                     case "analysis":
-                        //displayAnalysis(fetchAllCountries());
+                        displayAnalysis(fetchAllCountries());
                         break;
                     case "add":
                         //addNewCountry();
