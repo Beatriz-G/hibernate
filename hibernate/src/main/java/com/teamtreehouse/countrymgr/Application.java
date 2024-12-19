@@ -21,7 +21,6 @@ public class Application {
     // Hold a reusable reference to a SessionFactory(only need one)
     private static final SessionFactory sessionFactory = buildSessionFactory();
     private static final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-    private static final Map<String, String> menu = new LinkedHashMap<>();
 
     private static SessionFactory buildSessionFactory() {
         // Create a StandardServiceRegistry
@@ -33,7 +32,6 @@ public class Application {
     public static void main(String[] args) {
         //List<Country> countries = fetchAllCountries();
         run();
-
     }
 
     // Display the Country Data
@@ -59,6 +57,7 @@ public class Application {
     public static void displayCountryData(List<Country> countries) {
         System.out.println();
         System.out.println("-------------------*--*--*-*-View Country Data Here-*--*--*--*------------------");
+        System.out.println();
         System.out.printf("%-10s %-30s %-25s %-20s%n", "Code", "Name", "Internet Users", "Literacy Rate");
         // Format country data
         for (Country country : countries) {
@@ -111,13 +110,13 @@ public class Application {
         // Display the analysis
         System.out.println();
         System.out.println("--------*--*--*--*-Country Analysis-*--*--*--*--------");
+        System.out.println();
         System.out.printf("Country with the highest percentage of internet users is %s with %.2f.%n", maxInternet.getName(), maxInternet.getInternetUsers());
         System.out.printf("Country with the lowest percentage of internet users is %s with %.2f.%n", minInternet.getName(), minInternet.getInternetUsers());
         System.out.printf("Country with the highest adult literacy is %s with %.2f.%n", maxLiteracy.getName(), maxLiteracy.getAdultLiteracyRate());
         System.out.printf("Country with the lowest adult literacy is %s with %.2f.%n", minLiteracy.getName(), maxLiteracy.getAdultLiteracyRate());
         System.out.println("End of transaction.");
     }
-    // figure out null-pointer
 
     // Get country by code
     private static Country fetchCountryCode(String code) {
@@ -201,10 +200,16 @@ public class Application {
     // Country Addition
     private static void addNewCountry() throws IOException {
         List<Country> countries = fetchAllCountries();
-        System.out.println("----------Enter data for new country---------- ");
+        System.out.println();
+        System.out.println("-----*--*--*--*-Enter data for new country-*--*--*--*----- ");
+        System.out.println();
 
-        System.out.println("Give a country code with three characters: " );
+        System.out.println("What is the new country code: (3 characters only) " );
         String code = reader.readLine().trim().toUpperCase();
+        if (code.length() != 3) {
+            System.out.println("Please keep code to 3 letters only.\nReturn to menu and try again.");
+            return;
+        }
 
         System.out.println("What is the name of the country? ");
         String name = reader.readLine().trim();
@@ -239,42 +244,7 @@ public class Application {
         session.close();
     }
 
-
-     public static void countrySetup() {
-
-        System.out.println("Menu");
-        menu.put("View", "View country data");
-        menu.put("Analysis", "View maximum and minimum values for each country");
-        menu.put("Add", "Add data");
-        menu.put("Edit", "Edit data");
-        menu.put("Delete", "Delete data");
-        menu.put("Quit", "Exits the program");
-        System.out.println("Select an option");
-    }
-
     private static String promptAction() throws IOException {
-        // Menu Options
-
-
-        System.out.println();
-        System.out.println("--------*--*--*--*-Menu-*--*--*--*--------");
-        System.out.println();
-        for (Map.Entry<String, String> option : menu.entrySet()) {
-            out.printf("%s --> %s%n", option.getKey(), option.getValue());
-        }
-
-        System.out.print("Select an option: ");
-        String choice = reader.readLine();
-        return choice.trim().toLowerCase();
-    }
-
-
-
-
-
-
-
-    /*private static String promptAction() throws IOException {
         // Menu Options
         Map<String, String> menu = new TreeMap<>();
         menu.put("View", "View country data");
@@ -294,7 +264,7 @@ public class Application {
         System.out.print("Select an option: ");
         String choice = reader.readLine();
         return choice.trim().toLowerCase();
-    }*/
+    }
 
     public static void run() {
         String choice = "";
