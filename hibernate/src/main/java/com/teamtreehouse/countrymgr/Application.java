@@ -224,9 +224,8 @@ public class Application {
             System.out.println("Country added successfully!");
             System.out.println("End of transaction.");
     }
-    // figure out how to make literacy and internet 2% digits
 
-    // Country deletion capability
+    // Country deletion
     public static void deleteCountry() throws IOException {
         String code = userCountryCode();
         Country country = fetchCountryCode(code);
@@ -241,8 +240,8 @@ public class Application {
     }
 
 
-    private static void countrySetup() {
-        Map<String, String> menu = new TreeMap<>();
+     public static void countrySetup() {
+
         System.out.println("Menu");
         menu.put("View", "View country data");
         menu.put("Analysis", "View maximum and minimum values for each country");
@@ -251,8 +250,6 @@ public class Application {
         menu.put("Delete", "Delete data");
         menu.put("Quit", "Exits the program");
         System.out.println("Select an option");
-        String choice = reader.readLine();
-        return choice.trim().toLowerCase();
     }
 
     private static String promptAction() throws IOException {
@@ -332,6 +329,3 @@ public class Application {
         } while (!choice.equals("quit"));
     }
 }
-
-
- /*
