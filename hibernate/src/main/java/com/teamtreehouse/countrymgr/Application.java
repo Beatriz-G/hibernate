@@ -199,7 +199,6 @@ public class Application {
 
     // Country Addition
     private static void addNewCountry() throws IOException {
-        List<Country> countries = fetchAllCountries();
         System.out.println();
         System.out.println("-----*--*--*--*-Enter data for new country-*--*--*--*----- ");
         System.out.println();
@@ -252,7 +251,7 @@ public class Application {
         menu.put("Add", "Add data");
         menu.put("Edit", "Edit data");
         menu.put("Delete", "Delete data");
-        menu.put("Quit", "Exits the program");
+        menu.put("Quit", "Exit the program");
 
         System.out.println();
         System.out.println("--------*--*--*--*-Menu-*--*--*--*--------");
