@@ -106,18 +106,16 @@ public class Application {
                 .min(Comparator.comparing(Country::getAdultLiteracyRate))
                 .orElse(null);
 
-
         // Display the analysis
         System.out.println("---------------Country Analysis---------------");
-        System.out.printf("Country with the highest percentage of internet users is %s with %.2f.%n",
-                maxInternet.getName(),
-                maxInternet.getInternetUsers());
+        System.out.printf("Country with the highest percentage of internet users is %s with %.2f.%n", maxInternet.getName(), maxInternet.getInternetUsers());
         System.out.printf("Country with the lowest percentage of internet users is %s with %.2f.%n", minInternet.getName(), minInternet.getInternetUsers());
         System.out.printf("Country with the highest adult literacy is %s with %.2f.%n", maxLiteracy.getName(), maxLiteracy.getAdultLiteracyRate());
         System.out.printf("Country with the lowest adult literacy is %s with %.2f.%n", minLiteracy.getName(), maxLiteracy.getAdultLiteracyRate());
+        System.out.println("End of transaction.");
     }
+    // figure out null-pointer
 
-/*
     // Get country by code
     private static Country fetchCountryCode(String code) {
         Session session = sessionFactory.openSession();
@@ -129,20 +127,46 @@ public class Application {
     // Retrieve existing data and display for user
     private static String userCountryCode() throws IOException {
         displayCountryData(fetchAllCountries());
-        System.out.println("What country do you want to edit? Provde the code here: ");
-        String code = reader.readLine().trim().toUpperCase();
-        return code;
+        System.out.println("Provide the 3 character code of the country here: ");
+        return reader.readLine().trim().toUpperCase();
     }
 
 
+
+
+
+
     // Country Editing Function
-    public static void editCountry(List<Country> countries) {
-        String code = fetchCountryCode();
-        Country country = fetchCountryCode(country);
+    public static void editCountry() throws IOException{
+        String code = userCountryCode();
+        Country country = fetchCountryCode(code);
 
+        // If user picks country code that does not exist, message will notify them
+        if (country == null) {
+            System.out.println("Sorry, that code is not connected to a country. Please try again.");
+            return;
+        }
+        // Shows country picked with internet user rate and literacy rate
+        System.out.println("----------Available Country Data----------");
+        System.out.printf("You picked: %s %nWith %.2f percent of Internet Users, and a Literacy Rate of %.2f.%n", country.getName(), country.getInternetUsers(), country.getAdultLiteracyRate());
 
+        // Edits information
+        System.out.println("Enter new country name: ");
+        String newName = reader.readLine().trim();
 
+        System.out.println("Enter new internet user rate: ");
+        double newInternetUsers = Double.parseDouble(reader.readLine().trim());
 
+        System.out.println("Enter new adult literacy rate: ");
+        double newAdultLiteracyRate = Double.parseDouble(reader.readLine().trim());
+
+        country.setName(newName);
+        country.setInternetUsers(newInternetUsers);
+        country.setAdultLiteracyRate(newAdultLiteracyRate);
+
+        update(country);
+        System.out.println("Updated information!");
+        System.out.println("End of transaction.");
     }
 
     // Update country
@@ -154,9 +178,16 @@ public class Application {
         session.close();
     }
 
-*/
+
+
+
+
+
+
+
+
     // Save
-    public static void save(Country country) throws IOException {
+    public static void save(Country country) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         session.save(country);
@@ -169,16 +200,16 @@ public class Application {
         List<Country> countries = fetchAllCountries();
         System.out.println("----------Enter data for new country---------- ");
 
-        System.out.printf("Give a country code with three characters: " );
+        System.out.println("Give a country code with three characters: " );
         String code = reader.readLine().trim().toUpperCase();
 
         System.out.println("What is the name of the country? ");
         String name = reader.readLine().trim();
 
-        System.out.printf("Enter percentage of Internet Users: ");
+        System.out.println("Enter percentage of Internet Users: ");
         String internetUsers = reader.readLine().trim();
 
-        System.out.printf("Enter adult literacy percentage: ");
+        System.out.println("Enter adult literacy percentage: ");
         String adultLiteracyRate = reader.readLine().trim();
 
         // Save data to database
@@ -188,37 +219,42 @@ public class Application {
                 .build();
             save(country);
             System.out.println("Country added successfully!");
+            System.out.println("End of transaction.");
     }
     // figure out how to make literacy and internet 2% digits
 
-
-/*
     // Country deletion capability
-    public static void deleteCountry(Country country) {
+    public static void deleteCountry() throws IOException {
+        String code = userCountryCode();
+        Country country = fetchCountryCode(code);
+        System.out.println("You picked " + code + " to be deleted.");
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         session.delete(country);
-        session.getTransaction();
+        session.getTransaction().commit();
+        System.out.println("Country has been deleted.");
+        System.out.println("End of transaction.");
         session.close();
-        System.out.printf("You deleted %f%s from the list.", country.getName());
     }
-*/
+
     private static String promptAction() throws IOException {
         // Menu Options
         Map<String, String> menu = new TreeMap<>();
         menu.put("View", "View country data");
-        menu.put("Analysis", "View maximum and minumum values for each country");
+        menu.put("Analysis", "View maximum and minimum values for each country");
         menu.put("Add", "Add data");
         menu.put("Edit", "Edit data");
         menu.put("Delete", "Delete data");
         menu.put("Quit", "Exits the program");
 
-        System.out.printf("Menu: %n");
+        System.out.println();
+        System.out.println("--------*--*--*--*-Menu-*--*--*--*--------");
+        System.out.println();
         for (Map.Entry<String, String> option : menu.entrySet()) {
             out.printf("%s --> %s%n", option.getKey(), option.getValue());
         }
 
-        System.out.printf("Select an option: ");
+        System.out.println("Select an option: ");
         String choice = reader.readLine();
         return choice.trim().toLowerCase();
     }
@@ -239,10 +275,10 @@ public class Application {
                         addNewCountry();
                         break;
                     case "edit":
-                        //editCountry(fetchAllCountries());
+                        editCountry();
                         break;
                     case "delete":
-                        //deleteCountry();
+                        deleteCountry();
                         break;
                     case "quit":
                         out.println("End of Program");
