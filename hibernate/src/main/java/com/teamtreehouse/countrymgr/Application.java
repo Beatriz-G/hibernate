@@ -30,7 +30,6 @@ public class Application {
     }
 
     public static void main(String[] args) {
-        //List<Country> countries = fetchAllCountries();
         run();
     }
 
@@ -53,7 +52,7 @@ public class Application {
         return countries;
     }
 
-    // Format data in columns with headers
+    // Display the Country
     public static void displayCountryData(List<Country> countries) {
         System.out.println();
         System.out.println("-------------------*--*--*-*-View Country Data Here-*--*--*--*------------------");
@@ -146,6 +145,7 @@ public class Application {
         // Shows country picked with internet user rate and literacy rate
         System.out.println("-----*--*--*--*-Available Country Data-*--*--*--*-----");
         System.out.printf("You picked: %s %nWith %.2f percent of Internet Users, and a Literacy Rate of %.2f.%n", country.getName(), country.getInternetUsers(), country.getAdultLiteracyRate());
+        System.out.println();
 
         // Edits information
         System.out.println("Enter new country name: ");
@@ -212,6 +212,7 @@ public class Application {
                 .withAdultLiteracyRate(Double.parseDouble(adultLiteracyRate))
                 .build();
             save(country);
+            System.out.println();
             System.out.println("Country added successfully!");
             System.out.println("End of transaction.");
     }
