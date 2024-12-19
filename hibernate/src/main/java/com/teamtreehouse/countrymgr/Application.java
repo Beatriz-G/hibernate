@@ -21,6 +21,7 @@ public class Application {
     // Hold a reusable reference to a SessionFactory(only need one)
     private static final SessionFactory sessionFactory = buildSessionFactory();
     private static final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    private static final Map<String, String> menu = new LinkedHashMap<>();
 
     private static SessionFactory buildSessionFactory() {
         // Create a StandardServiceRegistry
@@ -56,7 +57,8 @@ public class Application {
 
     // Format data in columns with headers
     public static void displayCountryData(List<Country> countries) {
-        System.out.println("------------------------------View Country Data Here------------------------------");
+        System.out.println();
+        System.out.println("-------------------*--*--*-*-View Country Data Here-*--*--*--*------------------");
         System.out.printf("%-10s %-30s %-25s %-20s%n", "Code", "Name", "Internet Users", "Literacy Rate");
         // Format country data
         for (Country country : countries) {
@@ -107,7 +109,8 @@ public class Application {
                 .orElse(null);
 
         // Display the analysis
-        System.out.println("---------------Country Analysis---------------");
+        System.out.println();
+        System.out.println("--------*--*--*--*-Country Analysis-*--*--*--*--------");
         System.out.printf("Country with the highest percentage of internet users is %s with %.2f.%n", maxInternet.getName(), maxInternet.getInternetUsers());
         System.out.printf("Country with the lowest percentage of internet users is %s with %.2f.%n", minInternet.getName(), minInternet.getInternetUsers());
         System.out.printf("Country with the highest adult literacy is %s with %.2f.%n", maxLiteracy.getName(), maxLiteracy.getAdultLiteracyRate());
@@ -237,7 +240,44 @@ public class Application {
         session.close();
     }
 
+
+    private static void countrySetup() {
+        Map<String, String> menu = new TreeMap<>();
+        System.out.println("Menu");
+        menu.put("View", "View country data");
+        menu.put("Analysis", "View maximum and minimum values for each country");
+        menu.put("Add", "Add data");
+        menu.put("Edit", "Edit data");
+        menu.put("Delete", "Delete data");
+        menu.put("Quit", "Exits the program");
+        System.out.println("Select an option");
+        String choice = reader.readLine();
+        return choice.trim().toLowerCase();
+    }
+
     private static String promptAction() throws IOException {
+        // Menu Options
+
+
+        System.out.println();
+        System.out.println("--------*--*--*--*-Menu-*--*--*--*--------");
+        System.out.println();
+        for (Map.Entry<String, String> option : menu.entrySet()) {
+            out.printf("%s --> %s%n", option.getKey(), option.getValue());
+        }
+
+        System.out.print("Select an option: ");
+        String choice = reader.readLine();
+        return choice.trim().toLowerCase();
+    }
+
+
+
+
+
+
+
+    /*private static String promptAction() throws IOException {
         // Menu Options
         Map<String, String> menu = new TreeMap<>();
         menu.put("View", "View country data");
@@ -254,10 +294,10 @@ public class Application {
             out.printf("%s --> %s%n", option.getKey(), option.getValue());
         }
 
-        System.out.println("Select an option: ");
+        System.out.print("Select an option: ");
         String choice = reader.readLine();
         return choice.trim().toLowerCase();
-    }
+    }*/
 
     public static void run() {
         String choice = "";
@@ -295,15 +335,3 @@ public class Application {
 
 
  /*
- session example
-           // Open Session
-            Session session = sessionFactory.openSession();
-            // Begin a transaction
-            session.beginTransaction();
-            //Use the session to save the contact
-            session.save(country);
-            // Commit the transaction
-            session.getTransaction().commit();
-            // Close the session
-            session.close();
-            */
