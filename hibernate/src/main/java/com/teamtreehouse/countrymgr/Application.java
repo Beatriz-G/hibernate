@@ -79,9 +79,9 @@ public class Application {
         }
     }
 
-    // Display the Analysis
-    // Calculate and display max/min values for internetUsers and adultLiteracyRate
+    // Display the analysis
     private static void displayAnalysis(List<Country> countries) {
+        // Calculate and displays max/min values for internetUsers and adultLiteracyRate
         // Max value for internetUsers
         Country maxInternet = countries.stream()
                 .filter(country -> country.getInternetUsers() != null)
@@ -128,12 +128,13 @@ public class Application {
     // Retrieve existing data and display for user
     private static String userCountryCode() throws IOException {
         displayCountryData(fetchAllCountries());
+        // Allow user to pick country by code
         System.out.println("Provide the 3 character code of the country here: ");
         return reader.readLine().trim().toUpperCase();
     }
 
-    // Country Editing Function
-    public static void editCountry() throws IOException{
+    // Country editing function
+    public static void editCountry() throws IOException {
         String code = userCountryCode();
         Country country = fetchCountryCode(code);
 
@@ -142,12 +143,14 @@ public class Application {
             System.out.println("Sorry, that code is not connected to a country.\nReturn to menu and try again.");
             return;
         }
-        // Shows country picked with internet user rate and literacy rate
-        System.out.println("-----*--*--*--*-Available Country Data-*--*--*--*-----");
+        // Shows country picked with current internet user rate and literacy rate
+        System.out.println();
+        System.out.println("-----*--*--*--*-Current Country Data-*--*--*--*-----");
+        System.out.println();
         System.out.printf("You picked: %s %nWith %.2f percent of Internet Users, and a Literacy Rate of %.2f.%n", country.getName(), country.getInternetUsers(), country.getAdultLiteracyRate());
         System.out.println();
 
-        // Edits information
+        // Edit country name, interUser data and adultLiteracy data
         System.out.println("Enter new country name: ");
         String newName = reader.readLine().trim();
 
@@ -162,11 +165,12 @@ public class Application {
         country.setAdultLiteracyRate(newAdultLiteracyRate);
 
         update(country);
+        System.out.println();
         System.out.println("Updated information!");
         System.out.println("End of transaction.");
     }
 
-    // Update country
+    // Update data
     private static void update(Country country) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
@@ -175,7 +179,7 @@ public class Application {
         session.close();
     }
 
-    // Save
+    // Save data
     public static void save(Country country) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
@@ -184,13 +188,13 @@ public class Application {
         session.close();
     }
 
-    // Country Addition
+    // Country addition
     private static void addNewCountry() throws IOException {
         System.out.println();
         System.out.println("-----*--*--*--*-Enter data for new country-*--*--*--*----- ");
         System.out.println();
 
-        System.out.println("What is the new country code: (3 characters only) " );
+        System.out.println("What is the new country code: (3 characters only) ");
         String code = reader.readLine().trim().toUpperCase();
         if (code.length() != 3) {
             System.out.println("Please keep code to 3 letters only.\nReturn to menu and try again.");
@@ -208,13 +212,13 @@ public class Application {
 
         // Save data to database
         Country country = new CountryBuilder(name, code)
-                .withInternetUsers(Double.parseDouble(internetUsers) )
+                .withInternetUsers(Double.parseDouble(internetUsers))
                 .withAdultLiteracyRate(Double.parseDouble(adultLiteracyRate))
                 .build();
-            save(country);
-            System.out.println();
-            System.out.println("Country added successfully!");
-            System.out.println("End of transaction.");
+        save(country);
+        System.out.println();
+        System.out.println("Country added successfully!");
+        System.out.println("End of transaction.");
     }
 
     // Country deletion
@@ -232,7 +236,7 @@ public class Application {
     }
 
     private static String promptAction() throws IOException {
-        // Menu Options
+        // Menu options
         Map<String, String> menu = new TreeMap<>();
         menu.put("Display", "Display country data");
         menu.put("Analysis", "View maximum and minimum values for each country");
@@ -259,7 +263,7 @@ public class Application {
             try {
                 choice = promptAction();
                 switch (choice) {
-                    case "view":
+                    case "display":
                         displayCountryData(fetchAllCountries());
                         break;
                     case "analysis":
@@ -275,7 +279,7 @@ public class Application {
                         deleteCountry();
                         break;
                     case "quit":
-                        out.println("End of Program");
+                        out.println("---*--*-End of Program-*--*---");
                         break;
                     default:
                         out.printf("Unknown choice: '%s'. Try again.%n%n%n", choice);
