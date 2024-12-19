@@ -168,7 +168,7 @@ public class Application {
         System.out.printf("Country with the highest percentage of internet users is %s with %.2f.%n", maxInternet.getName(), maxInternet.getInternetUsers());
         System.out.printf("Country with the lowest percentage of internet users is %s with %.2f.%n", minInternet.getName(), minInternet.getInternetUsers());
         System.out.printf("Country with the highest adult literacy is %s with %.2f.%n", maxLiteracy.getName(), maxLiteracy.getAdultLiteracyRate());
-        System.out.printf("Country with the lowest adult literacy is %s with %.2f.%n", minLiteracy.getName(), maxLiteracy.getAdultLiteracyRate());
+        System.out.printf("Country with the lowest adult literacy is %s with %.2f.%n", minLiteracy.getName(), minLiteracy.getAdultLiteracyRate());
         System.out.println("End of transaction.");
     }
 
