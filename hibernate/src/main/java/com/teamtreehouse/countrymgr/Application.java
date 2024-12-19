@@ -33,6 +33,61 @@ public class Application {
         run();
     }
 
+    private static String promptAction() throws IOException {
+        // Menu options
+        Map<String, String> menu = new TreeMap<>();
+        menu.put("Display", "Display country data");
+        menu.put("Analysis", "View maximum and minimum values for each country");
+        menu.put("Add", "Add country");
+        menu.put("Edit", "Edit country");
+        menu.put("Delete", "Delete country");
+        menu.put("Quit", "Exit the program");
+
+        System.out.println();
+        System.out.println("--------*--*--*--*-Menu-*--*--*--*--------");
+        System.out.println();
+        for (Map.Entry<String, String> option : menu.entrySet()) {
+            out.printf("%s --> %s%n", option.getKey(), option.getValue());
+        }
+
+        System.out.print("Select a menu option: ");
+        String choice = reader.readLine();
+        return choice.trim().toLowerCase();
+    }
+
+    public static void run() {
+        String choice = "";
+        do {
+            try {
+                choice = promptAction();
+                switch (choice) {
+                    case "display":
+                        displayCountryData(fetchAllCountries());
+                        break;
+                    case "analysis":
+                        displayAnalysis(fetchAllCountries());
+                        break;
+                    case "add":
+                        addNewCountry();
+                        break;
+                    case "edit":
+                        editCountry();
+                        break;
+                    case "delete":
+                        deleteCountry();
+                        break;
+                    case "quit":
+                        out.println("---*--*-End of Program-*--*---");
+                        break;
+                    default:
+                        out.printf("Unknown choice: '%s'. Try again.%n%n%n", choice);
+                }
+            } catch (IOException ioe) {
+                out.println("Problem with input.");
+            }
+        } while (!choice.equals("quit"));
+    }
+
     // Display the Country Data
     // Fetch all countries with Hibernate
     private static List<Country> fetchAllCountries() {
@@ -233,60 +288,5 @@ public class Application {
         System.out.println("Country has been deleted.");
         System.out.println("End of transaction.");
         session.close();
-    }
-
-    private static String promptAction() throws IOException {
-        // Menu options
-        Map<String, String> menu = new TreeMap<>();
-        menu.put("Display", "Display country data");
-        menu.put("Analysis", "View maximum and minimum values for each country");
-        menu.put("Add", "Add country");
-        menu.put("Edit", "Edit country");
-        menu.put("Delete", "Delete country");
-        menu.put("Quit", "Exit the program");
-
-        System.out.println();
-        System.out.println("--------*--*--*--*-Menu-*--*--*--*--------");
-        System.out.println();
-        for (Map.Entry<String, String> option : menu.entrySet()) {
-            out.printf("%s --> %s%n", option.getKey(), option.getValue());
-        }
-
-        System.out.print("Select a menu option: ");
-        String choice = reader.readLine();
-        return choice.trim().toLowerCase();
-    }
-
-    public static void run() {
-        String choice = "";
-        do {
-            try {
-                choice = promptAction();
-                switch (choice) {
-                    case "display":
-                        displayCountryData(fetchAllCountries());
-                        break;
-                    case "analysis":
-                        displayAnalysis(fetchAllCountries());
-                        break;
-                    case "add":
-                        addNewCountry();
-                        break;
-                    case "edit":
-                        editCountry();
-                        break;
-                    case "delete":
-                        deleteCountry();
-                        break;
-                    case "quit":
-                        out.println("---*--*-End of Program-*--*---");
-                        break;
-                    default:
-                        out.printf("Unknown choice: '%s'. Try again.%n%n%n", choice);
-                }
-            } catch (IOException ioe) {
-                out.println("Problem with input.");
-            }
-        } while (!choice.equals("quit"));
     }
 }
