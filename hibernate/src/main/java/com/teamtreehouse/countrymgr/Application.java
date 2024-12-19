@@ -145,11 +145,11 @@ public class Application {
 
         // If user picks country code that does not exist, message will notify them
         if (country == null) {
-            System.out.println("Sorry, that code is not connected to a country. Please try again.");
+            System.out.println("Sorry, that code is not connected to a country.\nReturn to menu and try again.");
             return;
         }
         // Shows country picked with internet user rate and literacy rate
-        System.out.println("----------Available Country Data----------");
+        System.out.println("-----*--*--*--*-Available Country Data-*--*--*--8-----");
         System.out.printf("You picked: %s %nWith %.2f percent of Internet Users, and a Literacy Rate of %.2f.%n", country.getName(), country.getInternetUsers(), country.getAdultLiteracyRate());
 
         // Edits information
@@ -179,14 +179,6 @@ public class Application {
         session.getTransaction().commit();
         session.close();
     }
-
-
-
-
-
-
-
-
 
     // Save
     public static void save(Country country) {
