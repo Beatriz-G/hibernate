@@ -233,7 +233,7 @@ public class Application {
     private static String promptAction() throws IOException {
         // Menu Options
         Map<String, String> menu = new TreeMap<>();
-        menu.put("View", "View country data");
+        menu.put("Display", "Display country data");
         menu.put("Analysis", "View maximum and minimum values for each country");
         menu.put("Add", "Add country");
         menu.put("Edit", "Edit country");
@@ -247,7 +247,7 @@ public class Application {
             out.printf("%s --> %s%n", option.getKey(), option.getValue());
         }
 
-        System.out.print("Select an option: ");
+        System.out.print("Select a menu option: ");
         String choice = reader.readLine();
         return choice.trim().toLowerCase();
     }
