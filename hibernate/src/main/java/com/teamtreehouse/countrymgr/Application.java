@@ -133,11 +133,6 @@ public class Application {
         return reader.readLine().trim().toUpperCase();
     }
 
-
-
-
-
-
     // Country Editing Function
     public static void editCountry() throws IOException{
         String code = userCountryCode();
@@ -240,9 +235,9 @@ public class Application {
         Map<String, String> menu = new TreeMap<>();
         menu.put("View", "View country data");
         menu.put("Analysis", "View maximum and minimum values for each country");
-        menu.put("Add", "Add data");
-        menu.put("Edit", "Edit data");
-        menu.put("Delete", "Delete data");
+        menu.put("Add", "Add country");
+        menu.put("Edit", "Edit country");
+        menu.put("Delete", "Delete country");
         menu.put("Quit", "Exit the program");
 
         System.out.println();
