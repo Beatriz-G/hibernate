@@ -220,7 +220,7 @@ public class Application {
         String adultLiteracyRate = reader.readLine().trim();
 
         // Save data to database
-        Country country = new CountryBuilder(code, name)
+        Country country = new CountryBuilder(name, code)
                 .withInternetUsers(Double.parseDouble(internetUsers) )
                 .withAdultLiteracyRate(Double.parseDouble(adultLiteracyRate))
                 .build();
