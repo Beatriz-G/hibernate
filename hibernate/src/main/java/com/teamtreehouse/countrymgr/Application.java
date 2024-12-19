@@ -149,7 +149,7 @@ public class Application {
             return;
         }
         // Shows country picked with internet user rate and literacy rate
-        System.out.println("-----*--*--*--*-Available Country Data-*--*--*--8-----");
+        System.out.println("-----*--*--*--*-Available Country Data-*--*--*--*-----");
         System.out.printf("You picked: %s %nWith %.2f percent of Internet Users, and a Literacy Rate of %.2f.%n", country.getName(), country.getInternetUsers(), country.getAdultLiteracyRate());
 
         // Edits information
